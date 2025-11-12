@@ -2,11 +2,8 @@ pipeline {
     agent any
 
     environment {
-        // Uncomment below if pushing to DockerHub
-        // DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+        // DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials') // if needed later
         DOCKER_IMAGE = "employeeprofilemanagement_image"
-
-        // Database URL used when dockerization is done for the application
         DB_URL = "jdbc:postgresql://host.docker.internal:5432/epms_db"
     }
 
@@ -19,7 +16,6 @@ pipeline {
 
         stage('Build') {
             steps {
-                // Build docker image using Dockerfile
                 sh '''
                     echo "🚀 Building Docker image..."
                     docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} -f Dockerfile .
@@ -31,25 +27,16 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        echo "🧹 Cleaning up any existing container..."
-
-                        # Stop and remove existing container if it exists
+                        echo "🧹 Checking if container already exists..."
+                        # Stop and remove container if it exists
                         if [ "$(docker ps -aq -f name=employeeprofilemanagement)" ]; then
-                            echo "🛑 Stopping existing container..."
+                            echo "⚠️ Container already exists. Stopping and removing..."
                             docker stop employeeprofilemanagement || true
-
-                            echo "🗑️ Removing existing container..."
-                            docker rm -f employeeprofilemanagement || true
+                            docker rm employeeprofilemanagement || true
                         fi
 
                         echo "🐳 Running new Docker container..."
-                        docker run -d \
-                            --name employeeprofilemanagement \
-                            -e SPRING_DATASOURCE_URL=${DB_URL} \
-                            -e SPRING_DATASOURCE_USERNAME=${DB_USERNAME} \
-                            -e SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD} \
-                            -p 8200:8200 \
-                            ${DOCKER_IMAGE}:${BUILD_NUMBER}
+                        docker run -e DB_URL=${DB_URL} -d --name employeeprofilemanagement -p 8200:8200 ${DOCKER_IMAGE}:${BUILD_NUMBER}
                     '''
                 }
             }
