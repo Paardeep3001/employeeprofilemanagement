@@ -3,19 +3,18 @@ pipeline {
 
     environment {
 
-        KUBECONFIG = "/Users/sailokesh/.kube/config"
+        KUBECONFIG = "/Users/harihara/.kube/config"
         // Docker image name
         DOCKER_IMAGE = "employeeprofilemanagement_image"
 
         // PostgreSQL database URL (change if needed)
         DB_URL = "jdbc:postgresql://host.docker.internal:5432/epms_db"
-        DB_USERNAME = "postgres"
-        DB_PASSWORD = "postgres"
+        DB_USERNAME = "HariharaJujjarapu"
+        DB_PASSWORD = "261003"
 
         // Kubernetes Namespace
         K8S_NAMESPACE = "epms-namespace"
     }
-
 
     stages {
 
