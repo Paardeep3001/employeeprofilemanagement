@@ -9,7 +9,7 @@ pipeline {
 
         // PostgreSQL database URL (change if needed)
         DB_URL = "jdbc:postgresql://host.docker.internal:5432/epms_db"
-        DB_USERNAME = "HariharaJujjarapu"
+        DB_USERNAME = "harihara_jujjarapu"
         DB_PASSWORD = "261003"
 
         // Kubernetes Namespace

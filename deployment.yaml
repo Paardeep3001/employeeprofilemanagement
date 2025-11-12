@@ -23,7 +23,7 @@ spec:
               value: "jdbc:postgresql://host.docker.internal:5432/epms_db"
 
             - name: SPRING_DATASOURCE_USERNAME
-              value: "HariharaJujjarapu"
+              value: "harihara_jujjarapu"
 
             - name: SPRING_DATASOURCE_PASSWORD
               value: "261003"
