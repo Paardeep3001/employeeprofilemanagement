@@ -16,6 +16,7 @@ pipeline {
         K8S_NAMESPACE = "epms-namespace"
     }
 
+
     stages {
 
         /* -----------------------------------------
