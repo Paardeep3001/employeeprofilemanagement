@@ -3,14 +3,14 @@ pipeline {
 
     environment {
 
-        KUBECONFIG = "/Users/harihara/.kube/config"
+        KUBECONFIG = "/Users/paardeepappikatla/.kube/config"
         // Docker image name
         DOCKER_IMAGE = "employeeprofilemanagement_image"
 
         // PostgreSQL database URL (change if needed)
         DB_URL = "jdbc:postgresql://host.docker.internal:5432/epms_db"
-        DB_USERNAME = "harihara_jujjarapu"
-        DB_PASSWORD = "261003"
+        DB_USERNAME = "postgres"
+        DB_PASSWORD = "postgres"
 
         // Kubernetes Namespace
         K8S_NAMESPACE = "epms-namespace"
@@ -23,7 +23,7 @@ pipeline {
         ----------------------------------------- */
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/HariharaJujjarapu/employeeprofilemanagement'
+                git branch: 'main', url: 'https://github.com/Paardeep3001/employeeprofilemanagement.git'
             }
         }
 
